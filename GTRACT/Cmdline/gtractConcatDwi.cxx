@@ -57,12 +57,13 @@
 #include <BRAINSCommonLib.h>
 
 #undef HAVE_SSTREAM
-#include "..//DWIConvert//DWIConvertLib.h"
+#include "../../DWIConvert/DWIConvertLib.h"
 
 
 // return 0: successful convert;
 // return 1: error in read files;
 // return -1: unnecessary convert
+
 int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::vector<std::string>& inputVolumeNrrd){
    inputVolumeNrrd.clear();
    int nSize = inputVolume.size();
