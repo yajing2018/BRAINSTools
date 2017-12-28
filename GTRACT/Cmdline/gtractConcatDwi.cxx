@@ -58,7 +58,6 @@
 
 #include "gtractConcatDwiCLP.h"
 #include "DWIConvertLib.h"
-
 int main(int argc, char *argv[])
 {
   PARSE_ARGS;
