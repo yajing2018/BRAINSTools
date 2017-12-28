@@ -59,32 +59,39 @@
 #include "gtractConcatDwiCLP.h"
 #undef HAVE_SSTREAM
 #include "../../DWIConvert/DWIConvertLib.h"
+#include <sys/stat.h>
 
 
 
 // return 0: successful convert;
 // return 1: error in read files;
-// return -1: unnecessary convert
-
 int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::vector<std::string>& inputVolumeNrrd){
    inputVolumeNrrd.clear();
    int nSize = inputVolume.size();
    for (int i=0; i<nSize; ++i){
      std::string outputVolume;
-     bool isFile = true; // false indicates directory
-     {
-       std::ifstream checkFile(inputVolume.at(i));
-       isFile = (!checkFile) ? false: true;
-     }
-
      DWIConvert dWIConvert;
-     if (isFile){
-       dWIConvert.setInputFileType(inputVolume.at(i),"");
-       outputVolume = inputVolume.at(i)+".nrrd";
+     struct stat inputInfor;
+     if (-1 == stat(inputVolume.at(i).c_str(), &inputInfor)){
+       std::cout<<"Error: inputVolume is illegal file description. "<< std::endl;
+       return 1;
      }
      else{
-       dWIConvert.setInputFileType("", inputVolume.at(i));
-       outputVolume = "convert_"+std::to_string(i)+".nrrd";
+       if( inputInfor.st_mode & S_IFDIR )
+       {
+         dWIConvert.setInputFileType("", inputVolume.at(i));
+         outputVolume = "convert_"+std::to_string(i)+".nrrd";
+       }
+       else if( inputInfor.st_mode & S_IFREG )
+       {
+         dWIConvert.setInputFileType(inputVolume.at(i),"");
+         outputVolume = inputVolume.at(i)+".nrrd";
+       }
+       else
+       {
+         std::cout<<"Error: the inputVolume is neither file nor directory."<<std::endl;
+         return -1;
+       }
      }
 
      if ("Nrrd" == dWIConvert.getInputFileType()){
@@ -141,6 +148,10 @@ int main(int argc, char *argv[])
   std::vector<std::string> inputVolumeNrrd;
   if (0 == convertInputVolumeToNrrd(inputVolume,inputVolumeNrrd)){
     inputVolume = inputVolumeNrrd;
+  }
+  else{
+    std::cout<<"Error: gtractConcatDWI can not read inputVolume."<<std::endl;
+    return -1;
   }
 
   typedef signed short                   PixelType;
