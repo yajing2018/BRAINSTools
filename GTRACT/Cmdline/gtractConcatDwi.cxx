@@ -51,13 +51,15 @@
 #include <itkComposeImageFilter.h>
 #include "itkNumberToString.h"
 
-#include "gtractConcatDwiCLP.h"
+
 #include "BRAINSThreadControl.h"
 #include "DWIMetaDataDictionaryValidator.h"
 #include <BRAINSCommonLib.h>
 
+#include "gtractConcatDwiCLP.h"
 #undef HAVE_SSTREAM
 #include "../../DWIConvert/DWIConvertLib.h"
+
 
 
 // return 0: successful convert;

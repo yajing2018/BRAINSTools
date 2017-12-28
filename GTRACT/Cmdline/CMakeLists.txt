@@ -33,7 +33,7 @@ set(ALL_PROGS_LIST
   gtractResampleB0
   extractNrrdVectorIndex
   gtractAverageBvalues
-#  gtractConcatDwi
+  gtractConcatDwi
   gtractCostFastMarching
   gtractFastMarchingTracking
   gtractCopyImageOrientation
@@ -50,16 +50,9 @@ set(ALL_PROGS_LIST
 #  gtractGraphSearchTracking
   )
 foreach(prog ${ALL_PROGS_LIST})
-  StandardBRAINSBuildMacro(NAME ${prog} TARGET_LIBRARIES GTRACTCommon BRAINSCommonLib ${VTK_LIBRARIES})
+  StandardBRAINSBuildMacro(NAME ${prog} TARGET_LIBRARIES GTRACTCommon BRAINSCommonLib ${VTK_LIBRARIES} DWIConvertSupportLib)
 endforeach()
 
 if(BUILD_TESTING AND NOT BRAINSTools_DISABLE_TESTING)
    add_subdirectory(TestSuite)
 endif()
-
-set(CancatDWI_SOURCE_FILES
-        gtractConcatDwi.cxx
-    )
-
-add_executable(gtractConcatDwi ${CancatDWI_SOURCE_FILES})
-target_link_libraries(gtractConcatDwi BRAINSCommonLib DWIConvertSupportLib)
