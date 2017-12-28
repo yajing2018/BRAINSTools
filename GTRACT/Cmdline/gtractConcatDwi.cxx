@@ -56,6 +56,53 @@
 #include "DWIMetaDataDictionaryValidator.h"
 #include <BRAINSCommonLib.h>
 
+#undef HAVE_SSTREAM
+#include "..//DWIConvert//DWIConvertLib.h"
+
+
+// return 0: successful convert;
+// return 1: error in read files;
+// return -1: unnecessary convert
+int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::vector<std::string>& inputVolumeNrrd){
+   inputVolumeNrrd.clear();
+   int nSize = inputVolume.size();
+   for (int i=0; i<nSize; ++i){
+     std::string outputVolume;
+     bool isFile = true; // false indicates directory
+     {
+       std::ifstream checkFile(inputVolume.at(i));
+       isFile = (!checkFile) ? false: true;
+     }
+
+     DWIConvert dWIConvert;
+     if (isFile){
+       dWIConvert.setInputFileType(inputVolume.at(i),"");
+       outputVolume = inputVolume.at(i)+".nrrd";
+     }
+     else{
+       dWIConvert.setInputFileType("", inputVolume.at(i));
+       outputVolume = "convert_"+std::to_string(i)+".nrrd";
+     }
+
+     if ("Nrrd" == dWIConvert.getInputFileType()){
+        inputVolumeNrrd.push_back(inputVolume.at(i));
+     }
+     else {
+       dWIConvert.setOutputFileType(outputVolume);
+       int result = dWIConvert.read();
+       if (EXIT_SUCCESS == result)
+       {
+         dWIConvert.write(outputVolume);
+         inputVolumeNrrd.push_back(outputVolume);
+       }
+       else{
+         return 1;
+       }
+     }
+   }
+   return 0;
+ }
+
 int main(int argc, char *argv[])
 {
   PARSE_ARGS;
@@ -87,6 +134,11 @@ int main(int argc, char *argv[])
     {
     return EXIT_FAILURE;
     }
+
+  std::vector<std::string> inputVolumeNrrd;
+  if (0 == convertInputVolumeToNrrd(inputVolume,inputVolumeNrrd)){
+    inputVolume = inputVolumeNrrd;
+  }
 
   typedef signed short                   PixelType;
   typedef itk::VectorImage<PixelType, 3> NrrdImageType;

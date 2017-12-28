@@ -24,6 +24,8 @@ public:
     DWIConverter *getConverter() const;
 
     // get and set methods for private data members
+    std::string getInputFileType();
+    std::string getOutputFileType();
     void setInputFileType(const std::string& inputVolume,
                           const std::string& inputDicomDirectory);
 
@@ -91,8 +93,7 @@ public:
 
 private:
 
-    std::string getInputFileType();
-    std::string getOutputFileType();
+
 
     DWIConverter *CreateDicomConverter(
             const std::string inputDicomDirectory,
