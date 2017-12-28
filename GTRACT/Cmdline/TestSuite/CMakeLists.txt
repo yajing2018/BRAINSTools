@@ -88,7 +88,7 @@ ExternalData_add_test(${PROJECT_NAME}FetchData NAME ${GTRACTTestName}
 
 ## Test for gtractConcatDwi
 add_executable( gtractConcatDwiTests gtractConcatDwiTests.cxx )
-target_link_libraries( gtractConcatDwiTests  BRAINSCommonLib GTRACTCommon )
+target_link_libraries( gtractConcatDwiTests  BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
 set_target_properties(gtractConcatDwiTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 set(GTRACTTestName GTRACTTest_gtractConcatDwi)
