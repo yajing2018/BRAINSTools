@@ -61,8 +61,6 @@
 #include "../../DWIConvert/DWIConvertLib.h"
 #include <sys/stat.h>
 
-
-
 // return 0: successful convert;
 // return 1: error in read files;
 int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::vector<std::string>& inputVolumeNrrd){
@@ -71,6 +69,9 @@ int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::ve
    for (int i=0; i<nSize; ++i){
      std::string outputVolume;
      DWIConvert dWIConvert;
+
+     // AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
+     //On Windows,judge file or directory are different with Linux
      struct stat inputInfor;
      if (-1 == stat(inputVolume.at(i).c_str(), &inputInfor)){
        std::cout<<"Error: inputVolume is illegal file description. "<< std::endl;
