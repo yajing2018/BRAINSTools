@@ -1,7 +1,7 @@
 
 #add_executable( gtractCoRegAnatomyTests
 #    ${GTRACT_SOURCE_DIR}/Cmdline/gtractCoRegAnatomyPrimary.cxx gtractCoRegAnatomyTests.cxx )
-#target_link_libraries( gtractCoRegAnatomyTests  BRAINSCommonLib GTRACTCommon )
+#target_link_libraries( gtractCoRegAnatomyTests GTRACTCommon BRAINSCommonLib DWIConvertSupportLib )
 #set_target_properties(gtractCoRegAnatomyTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${GTRACT_BINARY_DIR})
 #set(GTRACT_CoRegAnatomy_TESTS ${GTRACT_BINARY_DIR}/gtractCoRegAnatomyTests )
 #
@@ -41,7 +41,7 @@ set(DWIBASELINE_DIR ${TestData_DIR}/DWI_TestData_OUTPUTS)
 
 ## Test for gtractCoregBvalues
 add_executable( gtractCoregBvaluesTests gtractCoregBvaluesTests.cxx )
-target_link_libraries( gtractCoregBvaluesTests  BRAINSCommonLib GTRACTCommon )
+target_link_libraries( gtractCoregBvaluesTests GTRACTCommon BRAINSCommonLib DWIConvertSupportLib )
 set_target_properties(gtractCoregBvaluesTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 ## TODO: gtractCoregBvalues returns segfault after the registration step.
@@ -69,7 +69,7 @@ set_target_properties(gtractCoregBvaluesTests PROPERTIES RUNTIME_OUTPUT_DIRECTOR
 
 ## Test for gtractAverageBvalues
 add_executable( gtractAverageBvaluesTests gtractAverageBvaluesTests.cxx )
-target_link_libraries( gtractAverageBvaluesTests  BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
+target_link_libraries( gtractAverageBvaluesTests BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
 set_target_properties(gtractAverageBvaluesTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 set(GTRACTTestName GTRACTTest_gtractAverageBvalues)
@@ -88,7 +88,7 @@ ExternalData_add_test(${PROJECT_NAME}FetchData NAME ${GTRACTTestName}
 
 ## Test for gtractConcatDwi
 add_executable( gtractConcatDwiTests gtractConcatDwiTests.cxx )
-target_link_libraries( gtractConcatDwiTests  BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
+target_link_libraries( gtractConcatDwiTests BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
 set_target_properties(gtractConcatDwiTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 set(GTRACTTestName GTRACTTest_gtractConcatDwi)
