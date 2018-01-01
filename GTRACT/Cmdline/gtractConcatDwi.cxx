@@ -58,7 +58,7 @@
 
 #include "gtractConcatDwiCLP.h"
 #undef HAVE_SSTREAM
-#include "../../DWIConvert/DWIConvertLib.h"
+#include "DWIConvertLib.h"
 
 int main(int argc, char *argv[])
 {
