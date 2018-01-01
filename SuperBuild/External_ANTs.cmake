@@ -28,6 +28,7 @@ set(${proj}_CMAKE_OPTIONS
   -DBUILD_TESTING:BOOL=OFF
   -DANTS_SUPERBUILD:BOOL=OFF
   -DBUILD_ALL_ANTS_APPS:BOOL=ON #Perhaps turn this to OFF
+  -DANTS_BUILD_WITH_CCACHE:BOOL=OFF # This does not work well
   #  -DANTS_BUILD_DenoiseImage=ON
   #  -DANTS_BUILD_antsRegistration=ON
   #  -DANTS_BUILD_antsJointFusion=ON
@@ -37,7 +38,7 @@ if(${PRIMARY_PROJECT_NAME}_USE_QT)
 endif()
 ### --- End Project specific additions
 set(${proj}_REPOSITORY "https://github.com/stnava/ANTs.git")
-set(${proj}_GIT_TAG c95e77abe72b0df5679e4728787b87489595517e) # 20171210
+set(${proj}_GIT_TAG ITKv5) # 20171210
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
   GIT_REPOSITORY ${${proj}_REPOSITORY}

@@ -28,7 +28,7 @@ set(${proj}_CMAKE_OPTIONS
   )
 ### --- End Project specific additions
 set(${proj}_REPOSITORY "https://github.com/hjmjohnson/RTK.git")
-set(${proj}_GIT_TAG ITKv5) # 20160810
+set(${proj}_GIT_TAG ITKv5) # 20171231
 ExternalProject_Add(${proj}
   ${${proj}_EP_ARGS}
   GIT_REPOSITORY ${${proj}_REPOSITORY}
