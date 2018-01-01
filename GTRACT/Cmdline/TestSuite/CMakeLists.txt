@@ -69,7 +69,7 @@ set_target_properties(gtractCoregBvaluesTests PROPERTIES RUNTIME_OUTPUT_DIRECTOR
 
 ## Test for gtractAverageBvalues
 add_executable( gtractAverageBvaluesTests gtractAverageBvaluesTests.cxx )
-target_link_libraries( gtractAverageBvaluesTests  BRAINSCommonLib GTRACTCommon )
+target_link_libraries( gtractAverageBvaluesTests  BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
 set_target_properties(gtractAverageBvaluesTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 set(GTRACTTestName GTRACTTest_gtractAverageBvalues)
@@ -138,7 +138,7 @@ add_test(NAME ${GTRACTTestName}_Concat_multi_Dicom
 
 ## A set of tests for gtractResampleDWIInPlace
 add_executable( gtractResampleDWIInPlaceTests gtractResampleDWIInPlaceTests.cxx )
-target_link_libraries( gtractResampleDWIInPlaceTests  BRAINSCommonLib GTRACTCommon )
+target_link_libraries( gtractResampleDWIInPlaceTests  BRAINSCommonLib GTRACTCommon DWIConvertSupportLib)
 set_target_properties(gtractResampleDWIInPlaceTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 set(GTRACTTestName GTRACTTest_gtractResampleDWIInPlace)
