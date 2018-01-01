@@ -59,60 +59,6 @@
 #include "gtractConcatDwiCLP.h"
 #undef HAVE_SSTREAM
 #include "../../DWIConvert/DWIConvertLib.h"
-#include <sys/stat.h>
-
-// return 0: successful convert;
-// return 1: error in read files;
-int convertInputVolumeToNrrd(const std::vector<std::string> inputVolume, std::vector<std::string>& inputVolumeNrrd){
-   inputVolumeNrrd.clear();
-   int nSize = inputVolume.size();
-   for (int i=0; i<nSize; ++i){
-     std::string outputVolume;
-     DWIConvert dWIConvert;
-
-     // AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER
-     //On Windows,judge file or directory are different with Linux
-     struct stat inputInfor;
-     if (-1 == stat(inputVolume.at(i).c_str(), &inputInfor)){
-       std::cout<<"Error: inputVolume is illegal file description. "<< std::endl;
-       return 1;
-     }
-     else{
-       if( inputInfor.st_mode & S_IFDIR )
-       {
-         dWIConvert.setInputFileType("", inputVolume.at(i));
-         outputVolume = "convert_"+std::to_string(i)+".nrrd";
-       }
-       else if( inputInfor.st_mode & S_IFREG )
-       {
-         dWIConvert.setInputFileType(inputVolume.at(i),"");
-         outputVolume = inputVolume.at(i)+".nrrd";
-       }
-       else
-       {
-         std::cout<<"Error: the inputVolume is neither file nor directory."<<std::endl;
-         return -1;
-       }
-     }
-
-     if ("Nrrd" == dWIConvert.getInputFileType()){
-        inputVolumeNrrd.push_back(inputVolume.at(i));
-     }
-     else {
-       dWIConvert.setOutputFileType(outputVolume);
-       int result = dWIConvert.read();
-       if (EXIT_SUCCESS == result)
-       {
-         dWIConvert.write(outputVolume);
-         inputVolumeNrrd.push_back(outputVolume);
-       }
-       else{
-         return 1;
-       }
-     }
-   }
-   return 0;
- }
 
 int main(int argc, char *argv[])
 {
@@ -147,7 +93,9 @@ int main(int argc, char *argv[])
     }
 
   std::vector<std::string> inputVolumeNrrd;
-  if (0 == convertInputVolumeToNrrd(inputVolume,inputVolumeNrrd)){
+  DWIConvert dwiConvert;
+  if (0 == dwiConvert.convertInputVolumeVectorToNrrdOrNifti(dwiConvert.detectOuputVolumeType(outputVolume),
+                                                            inputVolume,inputVolumeNrrd)){
     inputVolume = inputVolumeNrrd;
   }
   else{
