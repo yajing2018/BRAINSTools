@@ -18,8 +18,8 @@ option(DEBUGGING_PRINT_IMAGES "Use the DEBUG_IMAGE_VIEWER for debugging" ON)
 ### A local macro for configuring all these programs consistantly for the different platforms.
 ###
 set(ALL_PROGS_LIST
-  gtractImageConformity
-  gtractInvertRigidTransform
+  gtractImageConformity   # supprt DWI interface
+  gtractInvertRigidTransform # No need DWI interface
   gtractTransformToDisplacementField
   gtractInvertBSplineTransform
   gtractResampleCodeImage
@@ -33,7 +33,7 @@ set(ALL_PROGS_LIST
   gtractResampleB0
   extractNrrdVectorIndex
   gtractAverageBvalues
-  gtractConcatDwi
+  gtractConcatDwi         # support DWI interface
   gtractCostFastMarching
   gtractFastMarchingTracking
   gtractCopyImageOrientation
