@@ -57,7 +57,6 @@
 #include <BRAINSCommonLib.h>
 
 #include "gtractConcatDwiCLP.h"
-#undef HAVE_SSTREAM
 #include "DWIConvertLib.h"
 
 int main(int argc, char *argv[])
@@ -99,7 +98,7 @@ int main(int argc, char *argv[])
     inputVolume = inputVolumeNrrd;
   }
   else{
-    std::cout<<"Error: gtractConcatDWI can not read inputVolume."<<std::endl;
+    std::cout<<"Error: DWI Convert can not read inputVolume."<<std::endl;
     return -1;
   }
 
