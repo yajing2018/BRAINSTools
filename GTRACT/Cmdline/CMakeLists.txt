@@ -21,7 +21,7 @@ option(DEBUGGING_PRINT_IMAGES "Use the DEBUG_IMAGE_VIEWER for debugging" ON)
 include_directories(../../DWIConvert)
 
 set(ALL_PROGS_LIST
-  gtractImageConformity               # supprt DWI interface
+  gtractImageConformity               # support DWI interface
   gtractInvertRigidTransform          # No need DWI interface
   gtractTransformToDisplacementField  # No need DWI interface
   gtractInvertBSplineTransform        # No need DWI interface
@@ -33,9 +33,9 @@ set(ALL_PROGS_LIST
   gtractCreateGuideFiber              # No need DWI interface
   gtractFiberTracking                 # No need DWI interface
   gtractResampleAnisotropy            # No need DWI interface
-  gtractResampleB0                    # supprt DWI interface
-  extractNrrdVectorIndex              # supprt DWI interface
-  gtractAverageBvalues                # supprt DWI interface
+  gtractResampleB0                    # support DWI interface
+  extractNrrdVectorIndex              # support DWI interface
+  gtractAverageBvalues                # support DWI interface
   gtractConcatDwi                     # support DWI interface
   gtractCostFastMarching              # No need DWI interface
   gtractFastMarchingTracking          # No need DWI interface
